@@ -40,7 +40,7 @@ function EmailPasswordLogin({ authType, isAdmin }: AuthProps) {
     },
   });
 
-  const [formInteracted, setFormInteracted] = useState(false); 
+  // const [formInteracted, setFormInteracted] = useState(false); 
   // const [formSubmitted, setFormSubmitted] = useState(false);
 
   async function onSubmit(data: FormData) {
@@ -50,7 +50,7 @@ function EmailPasswordLogin({ authType, isAdmin }: AuthProps) {
 
   const handleBlur = (fieldName: keyof FormData) => {
     
-    setFormInteracted(true);
+    // setFormInteracted(true);
     trigger(fieldName);  
   };
 
