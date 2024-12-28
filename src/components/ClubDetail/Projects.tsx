@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import ProjectCard from '@/components/projects/ProjectCard';
 import { sampleProjects } from '@/constants';
 import Typography from '@mui/material/Typography';
-import NewProject from './NewProject';
+import NewProject from '@/components/ClubDetail/NewProject';
+
 const Projects: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -19,25 +20,18 @@ const Projects: React.FC = () => {
     currentPage * itemsPerPage
   );
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
+  const handlePageChange = (page: number) => setCurrentPage(page);
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      handlePageChange(currentPage + 1);
-    }
+    if (currentPage < totalPages) handlePageChange(currentPage + 1);
   };
-
-  const isNextButtonDisabled = currentPage === totalPages || totalPages === 0;
 
   return (
     <div style={styles.container}>
-      <NewProject/>
-      <h1 style={{ color: '#fff', textAlign: 'left', fontSize: '30px', marginLeft: "18px", marginTop: "18px" , fontFamily: 'Poppins , sans-serif' , fontWeight: 600}}>All Projects</h1>
+      <NewProject />
+      <h1 style={{ ...styles.heading }}>All Projects</h1>
       <div style={styles.searchContainer}>
-      <Typography variant="h6" component="div" sx={{ fontWeight: 600,position:"absolute",left:"20%",top:"0",marginTop:"12px"}}>
-        SEARCH PROJECTS
+        <Typography variant="h6" sx={{ ...styles.typography }}>
+          SEARCH PROJECTS
         </Typography>
         <input
           type="text"
@@ -47,46 +41,38 @@ const Projects: React.FC = () => {
           style={styles.searchInput}
         />
       </div>
-      
+
       <div style={styles.cardContainer}>
         {currentProjects.length > 0 ? (
           currentProjects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              project={project}
-              style={styles.card}
-            />
+            <ProjectCard key={index} project={project} />
           ))
         ) : (
           <p style={{ color: '#fff' }}>No projects available.</p>
         )}
       </div>
 
-  
       {filteredProjects.length > 0 && (
         <div style={styles.pagination}>
-          <div style={styles.pageNumbers}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                style={{
-                  ...styles.pageButton,
-                  backgroundColor: currentPage === index + 1 ? '#555' : '#333',
-                  color: currentPage === index + 1 ? '#fff' : '#bbb',
-                }}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              style={{
+                ...styles.pageButton,
+                backgroundColor: currentPage === index + 1 ? '#555' : '#333',
+                color: currentPage === index + 1 ? '#fff' : '#bbb',
+              }}
+            >
+              {index + 1}
+            </button>
+          ))}
           <button
             onClick={handleNextPage}
-            disabled={isNextButtonDisabled}
+            disabled={currentPage === totalPages}
             style={{
               ...styles.nextButton,
-              backgroundColor: isNextButtonDisabled ? '#999' : '#28a745',
-              cursor: isNextButtonDisabled ? 'not-allowed' : 'pointer',
+              backgroundColor: currentPage === totalPages ? '#999' : '#28a745',
             }}
           >
             Next
@@ -96,6 +82,9 @@ const Projects: React.FC = () => {
     </div>
   );
 };
+
+export default Projects;
+
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
@@ -176,4 +165,3 @@ const styles: { [key: string]: React.CSSProperties } = {
 };
 
 
-export default Projects;
