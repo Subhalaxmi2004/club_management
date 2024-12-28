@@ -25,7 +25,7 @@ function EmailPasswordLogin({ authType, isAdmin }: AuthProps) {
 
   useEffect(() => {
     reset();
-  }, [authType, isAdmin, reset]);
+  }, [authType, isAdmin, ]);
   
   
 
