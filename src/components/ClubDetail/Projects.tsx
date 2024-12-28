@@ -45,7 +45,11 @@ const Projects: React.FC = () => {
       <div style={styles.cardContainer}>
         {currentProjects.length > 0 ? (
           currentProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+            <ProjectCard
+              key={index}
+              project={project}
+              
+            />
           ))
         ) : (
           <p style={{ color: '#fff' }}>No projects available.</p>
