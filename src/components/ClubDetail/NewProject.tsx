@@ -8,7 +8,8 @@ export default function NewProject() {
     description: "",
     clubId: "",
   });
-  const handleChange = (e) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -16,7 +17,7 @@ export default function NewProject() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Submitted");
   };
@@ -45,6 +46,7 @@ export default function NewProject() {
         noValidate
         autoComplete="off"
         sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+        onSubmit={handleSubmit}
       >
         <TextField
           sx={{
@@ -116,7 +118,6 @@ export default function NewProject() {
         <Button
           type="submit"
           variant="contained"
-          onClick={handleSubmit}
           sx={{
             backgroundColor: "#28A745",
             color: "#ffffff",
