@@ -1,0 +1,29 @@
+.card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 30px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    position: relative;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .details {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card:hover .details {
+    display: block;
+  }
+  
