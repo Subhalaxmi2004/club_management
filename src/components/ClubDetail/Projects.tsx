@@ -117,7 +117,7 @@ const Projects: React.FC = () => {
             <ProjectCard key={index} project={project} />
           ))
         ) : (
-          <Typography style={{ color: '#fff' }}>No projects available.</p>
+          <Typography style={{ color: '#fff' }}>No projects available.</Typography>
         )}
       </Box>
 
