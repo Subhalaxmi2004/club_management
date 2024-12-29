@@ -51,10 +51,11 @@ const Projects: React.FC = () => {
       </Typography>
       <Box
         sx={{
-          width: '70%',
+          width: {lg:"70%",md:"80%",sm:"85%",xs:"90%"},
           height: '134px',
-          paddingTop: '33px',
-          display: 'flex',
+          // paddingTop: '33px',
+          display: "flex",
+          flexDirection:{sm:"column",md:"column",lg:"row",xs:"column"},
           justifyContent: 'space-around',
           alignItems: 'center',
           marginBottom: '30px',
@@ -117,7 +118,7 @@ const Projects: React.FC = () => {
             <ProjectCard key={index} project={project} />
           ))
         ) : (
-          <Typography style={{ color: '#fff' }}>No projects available.</p>
+          <Typography style={{ color: '#fff' }}>No projects available.</Typography>
         )}
       </Box>
 
@@ -130,27 +131,32 @@ const Projects: React.FC = () => {
           }}
         >
           {Array.from({ length: totalPages }, (_, index) => (
-            <Button
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              sx={{
-                margin: '0 5px',
-                padding: '5px 10px',
-                border: 'none',
-                borderRadius: '50%',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s',
-                width: '36px',
-                height: '36px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: currentPage === index + 1 ? '#555' : '#333',
-                color: currentPage === index + 1 ? '#fff' : '#bbb',
-              }}
-            >
-              {index + 1}
-            </Button>
+           <Button
+           key={index}
+           onClick={() => handlePageChange(index + 1)}
+           sx={{
+             margin: '0 5px',
+             border: 'none',
+             borderRadius: '50%',
+             cursor: 'pointer',
+             transition: 'background-color 0.3s',
+             width: '36px', 
+             height: '36px',
+             padding: 0,
+             display: 'flex',
+             alignItems: 'center',
+             justifyContent: 'center',
+             backgroundColor: currentPage === index + 1 ? '#555' : '#333',
+             color: currentPage === index + 1 ? '#fff' : '#bbb',
+             minWidth: '0', 
+           }}
+         >
+           {index + 1}
+         </Button>
+         
+          
+           
+             
           ))}
           <Button
             onClick={handleNextPage}
