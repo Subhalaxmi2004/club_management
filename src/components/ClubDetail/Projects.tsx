@@ -4,7 +4,7 @@ import ProjectCard from '@/components/projects/ProjectCard';
 import { sampleProjects } from '@/constants';
 import Typography from '@mui/material/Typography';
 import NewProject from '@/components/ClubDetail/NewProject';
-
+import {  TextField, Button, Box } from "@mui/material";
 const Projects: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -26,7 +26,7 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <div
+    <Box
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -37,7 +37,7 @@ const Projects: React.FC = () => {
       }}
     >
       <NewProject />
-      <h1
+      <Typography
         sx={{
           color: '#fff',
           textAlign: 'left',
@@ -48,8 +48,8 @@ const Projects: React.FC = () => {
         }}
       >
         All Projects
-      </h1>
-      <div
+      </Typography>
+      <Box
         sx={{
           width: '70%',
           height: '134px',
@@ -74,24 +74,36 @@ const Projects: React.FC = () => {
         >
           SEARCH PROJECTS
         </Typography>
-        <input
-          type="text"
-          placeholder="Search in projects..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          sx={{
-            width: '60%',
-            padding: '10px',
-            borderRadius: '5px',
-            border: '1px solid #252525',
-            fontSize: '16px',
-            backgroundColor: '#1E1E1E',
-            color: '#fff',
-          }}
-        />
-      </div>
+        <TextField
+  variant="outlined"
+  placeholder="Search in projects..."
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+  sx={{
+    width: '60%',
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '5px',
+      backgroundColor: '#1E1E1E',
+      color: '#fff',
+    },
+    '& .MuiOutlinedInput-input': {
+      padding: '10px',
+      fontSize: '16px',
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#252525',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#555',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#28a745',
+    },
+  }}
+/>
+      </Box>
 
-      <div
+      <Box
         sx={{
           width: '100%',
           display: 'flex',
@@ -105,12 +117,12 @@ const Projects: React.FC = () => {
             <ProjectCard key={index} project={project} />
           ))
         ) : (
-          <p style={{ color: '#fff' }}>No projects available.</p>
+          <Typography style={{ color: '#fff' }}>No projects available.</p>
         )}
-      </div>
+      </Box>
 
       {filteredProjects.length > 0 && (
-        <div
+        <Box
           sx={{
             marginTop: '20px',
             display: 'flex',
@@ -118,7 +130,7 @@ const Projects: React.FC = () => {
           }}
         >
           {Array.from({ length: totalPages }, (_, index) => (
-            <button
+            <Button
               key={index}
               onClick={() => handlePageChange(index + 1)}
               sx={{
@@ -138,9 +150,9 @@ const Projects: React.FC = () => {
               }}
             >
               {index + 1}
-            </button>
+            </Button>
           ))}
-          <button
+          <Button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
             sx={{
@@ -154,10 +166,10 @@ const Projects: React.FC = () => {
             }}
           >
             Next
-          </button>
-        </div>
+          </Button>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 
