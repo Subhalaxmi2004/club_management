@@ -1,5 +1,5 @@
 import axios from "axios"
-export const API_URL = "http://localhost:4000";
+export const BASE_BACKEND_URL = "https://club-management-backend.onrender.com";
 // Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one special character
 export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
 
