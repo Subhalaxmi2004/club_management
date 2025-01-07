@@ -57,10 +57,10 @@ export const clubs: Club[] = [...technicalClubs, ...nonTechnicalClubs];
 export async function fetchClubs(type: 'Tech' | 'Non-Tech'): Promise<void> {
   try {
     console.log(`Fetching ${type} clubs...`);
-    console.log("env", API_URL);
+    console.log("env", BASE_BACKEND_URL);
 
    
-    const response = await axios.get<{ data: ApiClub[] }>(`${API_URL}/api/v1/clubs/getAll/${type}`);
+    const response = await axios.get<{ data: ApiClub[] }>(`${BASE_BACKEND_URL}/api/v1/clubs/getAll/${type}`);
     const { data } = response.data;
     console.log(`${type} clubs data:`, data);
 
