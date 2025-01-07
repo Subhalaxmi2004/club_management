@@ -34,30 +34,38 @@ export interface Club {
   id: string;
 }
 
-// Technical clubs (ensure distinct entries)
+
+export interface Club {
+  name: string;
+  description: string;
+  logo: string;
+  id: string;
+}
+
+export interface ApiClub {
+  clubName: string;
+  clubDescription: string;
+  clubLogo: string;
+  _id: string;
+}
+
 export const technicalClubs: Club[] = [];
 export const nonTechnicalClubs: Club[] = [];
 
 export const clubs: Club[] = [...technicalClubs, ...nonTechnicalClubs];
-// Technical clubs (ensure distinct entries)
-// export const technicalClubs = [
-//   // { name: 'Enigma', description: 'Official web and coding club of VSSUT, Burla', logo: '/enigma.jpg' ,id:"1"},
-//   // { name: 'Robotics', description: 'Electronics and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg',id:"2" },
 
-
-// ];
-// export const nonTechnicalClubs = [
-//   // { name: 'IEEE SB', description: 'Electroncs and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg',id:"3" },
-// ];
 export async function fetchClubs(type: 'Tech' | 'Non-Tech'): Promise<void> {
   try {
     console.log(`Fetching ${type} clubs...`);
-    console.log("env",API_URL);
-    
-    const response = await axios.get(`${API_URL}/api/v1/clubs/getAll/${type}`);
+    console.log("env", API_URL);
+
+   
+    const response = await axios.get<{ data: ApiClub[] }>(`${API_URL}/api/v1/clubs/getAll/${type}`);
     const { data } = response.data;
     console.log(`${type} clubs data:`, data);
-    const fetchedClubs = data.map((club): Club => ({
+
+ 
+    const fetchedClubs = data.map((club: ApiClub): Club => ({
       name: club.clubName,
       description: club.clubDescription,
       logo: club.clubLogo,
@@ -74,12 +82,15 @@ export async function fetchClubs(type: 'Tech' | 'Non-Tech'): Promise<void> {
       nonTechnicalClubs.push(...fetchedClubs);
     }
 
-    console.log(`Updated ${type === 'Tech' ? 'technicalClubs' : 'nonTechnicalClubs'}:`, 
-      type === 'Tech' ? technicalClubs : nonTechnicalClubs);
+    console.log(
+      `Updated ${type === 'Tech' ? 'technicalClubs' : 'nonTechnicalClubs'}:`,
+      type === 'Tech' ? technicalClubs : nonTechnicalClubs
+    );
   } catch (error) {
     console.error(`Error fetching ${type} clubs:`, error);
   }
 }
+
 
 
 export const imagesArray = [
