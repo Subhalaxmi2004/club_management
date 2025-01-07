@@ -1,3 +1,5 @@
+import axios from "axios"
+export const API_URL = "http://localhost:4000";
 // Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one special character
 export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
 
@@ -23,28 +25,64 @@ export const images = [
   },
 ];
 
-// Clubs information
-export const clubs = [
-  { id: "1", name: 'E-cell', description: 'Techno-management club of VSSUT, Burla', logo: '/eecell.png' },
-  { id: "2", name: 'Enigma', description: 'Official web and coding club of VSSUT, Burla', logo: '/enigma.jpg' },
-  { id: "3", name: 'IEEE SB', description: 'Electronics and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg' },
-];
+
+
+interface Club {
+  name: string;
+  description: string;
+  logo: string;
+  id: string;
+}
+
+// Technical clubs (ensure distinct entries)
+export const technicalClubs: Club[] = [];
+export const nonTechnicalClubs: Club[] = [];
 
 
 // Technical clubs (ensure distinct entries)
-export const technicalClubs = [
-  { name: 'Enigma', description: 'Official web and coding club of VSSUT, Burla', logo: '/enigma.jpg' ,id:"1"},
-  { name: 'Robotics', description: 'Electronics and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg',id:"2" },
+// export const technicalClubs = [
+//   // { name: 'Enigma', description: 'Official web and coding club of VSSUT, Burla', logo: '/enigma.jpg' ,id:"1"},
+//   // { name: 'Robotics', description: 'Electronics and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg',id:"2" },
 
 
-];
+// ];
+// export const nonTechnicalClubs = [
+//   // { name: 'IEEE SB', description: 'Electroncs and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg',id:"3" },
+// ];
+export async function fetchClubs(type: 'Tech' | 'Non-Tech'): Promise<void> {
+  try {
+    console.log(`Fetching ${type} clubs...`);
+    console.log("env",API_URL);
+    
+    const response = await axios.get(`${API_URL}/api/v1/clubs/getAll/${type}`);
+    const { data } = response.data;
+    console.log(`${type} clubs data:`, data);
 
-// Non-technical clubs (ensure distinct entries)
-export const nonTechnicalClubs = [
-  { name: 'IEEE SB', description: 'Electronics and Electrical Society of VSSUT, Burla', logo: '/ieee.jpg',id:"3" },
-];
+    const fetchedClubs = data.map((club: any) => ({
+      name: club.clubName,
+      description: club.clubDescription,
+      logo: club.clubLogo,
+      id: club._id,
+    }));
 
-// Consider removing or updating for unique images
+    console.log(`Fetched ${type} clubs:`, fetchedClubs);
+
+    if (type === 'Tech') {
+      technicalClubs.length = 0;
+      technicalClubs.push(...fetchedClubs);
+    } else if (type === 'Non-Tech') {
+      nonTechnicalClubs.length = 0;
+      nonTechnicalClubs.push(...fetchedClubs);
+    }
+
+    console.log(`Updated ${type === 'Tech' ? 'technicalClubs' : 'nonTechnicalClubs'}:`, 
+      type === 'Tech' ? technicalClubs : nonTechnicalClubs);
+  } catch (error) {
+    console.error(`Error fetching ${type} clubs:`, error);
+  }
+}
+
+
 export const imagesArray = [
   {
     src: '/ClubPIC2.jpg',
