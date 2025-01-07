@@ -27,7 +27,7 @@ export const images = [
 
 
 
-interface Club {
+export interface Club {
   name: string;
   description: string;
   logo: string;
@@ -38,7 +38,7 @@ interface Club {
 export const technicalClubs: Club[] = [];
 export const nonTechnicalClubs: Club[] = [];
 
-
+export const clubs: Club[] = [...technicalClubs, ...nonTechnicalClubs];
 // Technical clubs (ensure distinct entries)
 // export const technicalClubs = [
 //   // { name: 'Enigma', description: 'Official web and coding club of VSSUT, Burla', logo: '/enigma.jpg' ,id:"1"},
@@ -57,8 +57,7 @@ export async function fetchClubs(type: 'Tech' | 'Non-Tech'): Promise<void> {
     const response = await axios.get(`${API_URL}/api/v1/clubs/getAll/${type}`);
     const { data } = response.data;
     console.log(`${type} clubs data:`, data);
-
-    const fetchedClubs = data.map((club: any) => ({
+    const fetchedClubs = data.map((club): Club => ({
       name: club.clubName,
       description: club.clubDescription,
       logo: club.clubLogo,
