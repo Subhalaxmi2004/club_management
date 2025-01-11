@@ -4,12 +4,10 @@ import {
   CardContent,
   Typography,
   CardActions,
-
   Box,
   CardActionArea,
 } from "@mui/material";
 import data from "../data.json";
-
 
 export default function Left() {
   return (
@@ -19,6 +17,7 @@ export default function Left() {
         flexDirection: "column",
         alignItems: "center",
         gap: "10px",
+        width:{xs:"300px",sm:"100%"}
       }}
     >
       {data.map((item, index) => {
@@ -28,7 +27,7 @@ export default function Left() {
             sx={{
               background: "#1E1E1E",
               height: "90px",
-              width: { xs: "90%", sm: "400px" },
+              width: { xs: "85%", sm: "400px" ,md:"73%",lg:"73%" },
               display: "flex",
               alignItems: "center",
               padding: "10px",
@@ -67,12 +66,14 @@ export default function Left() {
                 position: "absolute",
                 right: "0px",
                 bottom: "-1px",
-                
               }}
             >
-              
-              <Typography component="a" href={'/'} sx={{color:"#4285F4",fontSize:"10px",fontWeight:"400"}}>
-                23-12-2024  →
+              <Typography
+                component="a"
+                href={"/"}
+                sx={{ color: "#4285F4", fontSize: "10px", fontWeight: "400" }}
+              >
+                23-12-2024 →
               </Typography>
             </CardActions>
           </Card>
