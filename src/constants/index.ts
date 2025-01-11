@@ -300,12 +300,13 @@ export const profiles = [
 // ];
 
 interface Type {
-  name: string;
-  title: string;
+  fullName: string;  
+  role: string;
   department: string;
   photo: string; 
   yearOfGraduation: string;
 }
+
 
 interface MemberAPIResponse {
   _id: string;
