@@ -360,13 +360,13 @@ export async function fetchMembers(): Promise<void> {
     });
 
 
-    const graduationYears = [
-      ...new Set(
+    const graduationYears = Array.from(
+      new Set(
         members
           .map((member) => member.type?.yearOfGraduation)
           .filter((year): year is string => year !== undefined)
-      ),
-    ];
+      )
+    );
     batches.push(...graduationYears.sort());
 
     console.log("Processed profiles:", profiles1);
