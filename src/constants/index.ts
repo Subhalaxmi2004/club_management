@@ -379,7 +379,7 @@ export async function fetchMembers(): Promise<void> {
 
 interface Achievement {
   _id: string;
-  image: string;
+  Image: string;
   header: string;
   description: string;
 }
@@ -403,7 +403,7 @@ export async function fetchAchievements(): Promise<void> {
  
     sampleAchievement = result.map((achievement) => ({
       _id: achievement._id,
-      image: achievement.Image, 
+      Image: achievement.Image, 
       header: achievement.header,
       description: achievement.description,
     }));

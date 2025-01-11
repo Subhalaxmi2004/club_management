@@ -79,7 +79,7 @@ const Achievements: React.FC = () => {
               <AchievementCard
                 key={index}
                 event={{
-                  image: achievement.image,
+                  image: achievement.Image,
                   title: achievement.header,
                   description: achievement.description,
              
