@@ -348,6 +348,9 @@ export async function fetchAchievements(): Promise<void> {
 // ];
 
 
+
+
+
 interface Event {
   _id: string;
   image: string;
@@ -367,13 +370,16 @@ export async function fetchEvents(): Promise<void> {
       "https://club-management-backend.onrender.com/api/v1/events/upcoming"
     );
 
-    const result = res.data.data;
-
+    // Debugging: Log the whole response structure to verify its structure
     console.log("API response from events:", res);
+
+    // Check if 'res.data.data' is indeed an array
+    const result = Array.isArray(res.data.data) ? res.data.data : [];
+
     console.log("Retrieved data from events:", result);
 
+    // Mapping and formatting date to 'YYYY-MM-DD'
     sampleEvents = result.map((event) => {
-     
       const formattedDate = new Date(event.date).toLocaleDateString("en-IN", {
         year: "numeric",
         month: "2-digit", 
@@ -383,10 +389,10 @@ export async function fetchEvents(): Promise<void> {
 
       return {
         _id: event._id,
-        image: "https://placehold.co/400", 
+        image: "https://placehold.co/400", // placeholder image
         name: event.name,
-        faculty: event.faculty || "Faculty Advisor Name",
-        date: formattedDate, 
+        faculty: event.faculty || "Faculty Advisor Name", // default value if faculty is empty
+        date: formattedDate, // formatted date
         venue: event.venue,
       };
     });
@@ -396,6 +402,7 @@ export async function fetchEvents(): Promise<void> {
     console.error("Error fetching events:", error);
   }
 }
+
 
 
 
