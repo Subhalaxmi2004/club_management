@@ -8,8 +8,8 @@ import Member from '@/components/ClubDetail/Member';
 import Projects from '@/components/ClubDetail/Projects';
 import ImageWithText from '@/components/Member/herosection';
 import Achievements from '@/components/achievement/achievement';
-// import Events from '@/components/events/Events';
-import { imagesArray,fetchMembers,fetchAchievements } from '@/constants';
+import Events from '@/components/events/Events';
+import { imagesArray,fetchMembers,fetchAchievements,fetchProjects,fetchEvents } from '@/constants';
 import Carousel from '@/components/subComponents/herosection1';
 
 const ClubsDetails: NextPage = () => {
@@ -18,6 +18,8 @@ const ClubsDetails: NextPage = () => {
   useEffect(() => {
     fetchMembers(); 
     fetchAchievements();
+    fetchProjects()
+    fetchEvents()
   }, []); 
   return (
     <>
@@ -48,7 +50,7 @@ const ClubsDetails: NextPage = () => {
         {activeLink === 'members' && <Member />}
         {activeLink === 'projects' && <Projects />}
         {activeLink === 'achievements' && <Achievements />}
-        {/* {activeLink === 'events' && <Events />} */}
+        {activeLink === 'events' && <Events />}
       </div>
     </>
   );
